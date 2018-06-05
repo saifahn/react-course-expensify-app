@@ -5,7 +5,8 @@ module.exports = merge(common, {
   mode: 'development',
   devtool: 'source-map',
   devServer: {
-    contentBase: `${__dirname}/public`,
+    contentBase: `${__dirname}/public/`,
     historyApiFallback: true,
+    publicPath: '/dist/',
   },
 });
