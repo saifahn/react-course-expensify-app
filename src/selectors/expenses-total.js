@@ -5,8 +5,7 @@ const getExpensesTotal = (expenses = []) => {
   // if (Object.prototype.toString.call(expenses) === '[object Object]') {
   //   return expenses.amount;
   // }
-  return expenses
-    .reduce((sum, expense) => sum + expense.amount, 0);
-};
+  return expenses.reduce((sum, expense) => sum + expense.amount, 0)
+}
 
-export default getExpensesTotal;
+export default getExpensesTotal

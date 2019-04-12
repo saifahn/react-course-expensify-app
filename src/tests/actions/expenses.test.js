@@ -5,7 +5,7 @@ import {
   startAddExpense,
   addExpense,
   removeExpense,
-  editExpense
+  editExpense,
 } from '../../actions/expenses'
 import expenses from '../fixtures/expenses'
 import database from '../../firebase/firebase'
@@ -16,7 +16,7 @@ test('should set up remove expense action object', () => {
   const action = removeExpense({ id: '123abc' })
   expect(action).toEqual({
     type: 'REMOVE_EXPENSE',
-    id: '123abc'
+    id: '123abc',
   })
 })
 
@@ -26,8 +26,8 @@ test('should set up edit expense action object', () => {
     type: 'EDIT_EXPENSE',
     id: '123abc',
     updates: {
-      description: 'rent'
-    }
+      description: 'rent',
+    },
   })
 })
 
@@ -35,7 +35,7 @@ test('should set up add expense action object with provided values', () => {
   const action = addExpense(expenses[2])
   expect(action).toEqual({
     type: 'ADD_EXPENSE',
-    expense: expenses[2]
+    expense: expenses[2],
   })
 })
 
@@ -48,7 +48,7 @@ test('should add expense to database and store', done => {
     description: 'Mouse',
     amount: 2500,
     note: 'This one is better',
-    createdAt: 1000
+    createdAt: 1000,
   }
 
   store
@@ -59,8 +59,8 @@ test('should add expense to database and store', done => {
         type: 'ADD_EXPENSE',
         expense: {
           id: expect.any(String),
-          ...expenseData
-        }
+          ...expenseData,
+        },
       })
 
       return database.ref(`expenses/${actions[0].expense.id}`).once('value')
@@ -77,7 +77,7 @@ test('should add expense with defaults to database and store', async () => {
     description: '',
     amount: 0,
     note: '',
-    createdAt: 0
+    createdAt: 0,
   }
 
   await store.dispatch(startAddExpense())
@@ -86,8 +86,8 @@ test('should add expense with defaults to database and store', async () => {
     type: 'ADD_EXPENSE',
     expense: {
       id: expect.any(String),
-      ...expenseDefaults
-    }
+      ...expenseDefaults,
+    },
   })
   const snapshot = await database
     .ref(`expenses/${actions[0].expense.id}`)
