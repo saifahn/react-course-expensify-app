@@ -15,7 +15,7 @@ exports[`should render EditExpensesPage 1`] = `
     onSubmit={[Function]}
   />
   <h4>
-    Editing the expense with id of 
+    Editing the expense with id of
     2
   </h4>
   <button

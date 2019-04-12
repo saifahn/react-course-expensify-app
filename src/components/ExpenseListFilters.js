@@ -1,37 +1,43 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { DateRangePicker } from 'react-dates';
-import { setTextFilter, sortByDate, sortByAmount, setStartDate, setEndDate } from '../actions/filters';
+import React from 'react'
+import { connect } from 'react-redux'
+import { DateRangePicker } from 'react-dates'
+import {
+  setTextFilter,
+  sortByDate,
+  sortByAmount,
+  setStartDate,
+  setEndDate,
+} from '../actions/filters'
 
 export class ExpenseListFilters extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       calendarFocused: null,
-    };
+    }
   }
 
   onDatesChange = ({ startDate, endDate }) => {
-    this.props.setStartDate(startDate);
-    this.props.setEndDate(endDate);
-  };
+    this.props.setStartDate(startDate)
+    this.props.setEndDate(endDate)
+  }
 
-  onFocusChange = (calendarFocused) => {
-    this.setState(() => ({ calendarFocused }));
-  };
+  onFocusChange = calendarFocused => {
+    this.setState(() => ({ calendarFocused }))
+  }
 
-  onTextChange = (e) => {
-    this.props.setTextFilter(e.target.value);
-  };
+  onTextChange = e => {
+    this.props.setTextFilter(e.target.value)
+  }
 
-  onSortChange = (e) => {
+  onSortChange = e => {
     if (e.target.value === 'date') {
-      this.props.sortByDate();
+      this.props.sortByDate()
     }
     if (e.target.value === 'amount') {
-      this.props.sortByAmount();
+      this.props.sortByAmount()
     }
-  };
+  }
 
   render() {
     return (
@@ -41,10 +47,7 @@ export class ExpenseListFilters extends React.Component {
           value={this.props.filters.text}
           onChange={this.onTextChange}
         />
-        <select
-          value={this.props.filters.sortBy}
-          onChange={this.onSortChange}
-        >
+        <select value={this.props.filters.sortBy} onChange={this.onSortChange}>
           <option value="date">Date</option>
           <option value="amount">Amount</option>
         </select>
@@ -63,7 +66,7 @@ export class ExpenseListFilters extends React.Component {
           // onFocusChange={focusedInput => this.setState({ focusedInput })}
         />
       </div>
-    );
+    )
   }
 }
 
@@ -73,12 +76,13 @@ const mapDispatchToProps = dispatch => ({
   sortByAmount: () => dispatch(sortByAmount()),
   setStartDate: startDate => dispatch(setStartDate(startDate)),
   setEndDate: endDate => dispatch(setEndDate(endDate)),
-});
+})
 
-const mapStateToProps = state => (
-  {
-    filters: state.filters,
-  }
-);
+const mapStateToProps = state => ({
+  filters: state.filters,
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExpenseListFilters);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ExpenseListFilters)
