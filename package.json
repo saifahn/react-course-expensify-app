@@ -45,6 +45,7 @@
     "webpack": "^4.8.3"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.1",
     "cross-env": "^5.2.0",
     "dotenv": "^6.0.0",
     "enzyme": "^3.3.0",
