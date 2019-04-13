@@ -8,6 +8,7 @@ import {
   editExpense,
   setExpenses,
   startSetExpenses,
+  startRemoveExpense,
 } from '../../actions/expenses'
 import expenses from '../fixtures/expenses'
 import database from '../../firebase/firebase'
@@ -123,16 +124,16 @@ test('should fetch the expenses from the firebase', async () => {
   })
 })
 
-// test('should set up add expense action object with default values', () => {
-//   const action = addExpense();
-//   expect(action).toEqual({
-//     type: 'ADD_EXPENSE',
-//     expense: {
-//       description: '',
-//       note: '',
-//       amount: 0,
-//       createdAt: 0,
-//       id: expect.any(String),
-//     },
-//   });
-// });
+test('should remove expenses from the firebase', async () => {
+  const store = createMockStore({})
+  await store.dispatch(startRemoveExpense({ id: expenses[0].id }))
+  const actions = store.getActions()
+  expect(actions[0]).toEqual({
+    type: 'REMOVE_EXPENSE',
+    id: expenses[0].id,
+  })
+  const snapshot = await database
+    .ref(`expenses/${expenses[0].id}`)
+    .once('value')
+  expect(snapshot.val()).toBeFalsy()
+})
