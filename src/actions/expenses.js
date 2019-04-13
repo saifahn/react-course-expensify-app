@@ -62,6 +62,19 @@ export const editExpense = (id, updates) => ({
   updates,
 })
 
+export const startEditExpense = (id, updates) => {
+  // actually change the thing on firebase
+
+  return dispatch => {
+    return database
+      .ref(`expenses/${id}`)
+      .update(updates)
+      .then(() => {
+        dispatch(editExpense(id, updates))
+      })
+  }
+}
+
 export const setExpenses = expenses => ({
   type: 'SET_EXPENSES',
   expenses,
